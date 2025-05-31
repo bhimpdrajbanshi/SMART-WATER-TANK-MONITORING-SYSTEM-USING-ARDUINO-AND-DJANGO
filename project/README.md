@@ -7,7 +7,6 @@ This project estimates the water level in a tank using an **Ultrasonic Sensor (H
 - Ultrasonic Sensor (HC-SR04)
 - Buzzer (for alerts)
 - Jumper wires
-- (Optional) LCD Display (initially used, removed later)
 
 ## ⚙️ Working Principle
 The ultrasonic sensor measures the distance between itself and the water surface. The tank height is predefined (e.g., 30 cm), so the water level is calculated as:
@@ -28,7 +27,7 @@ Water Level = Tank Height - Distance from Sensor
 #define trigPin 9
 #define echoPin 10
 #define buzzerPin 8
-#define tankHeight 30  // cm
+#define tankHeight 100  // liter
 
 void setup() {
   pinMode(trigPin, OUTPUT);
@@ -119,16 +118,16 @@ fetch('/api/latest/').then(res => res.json()).then(data => {
 </script>
 ```
 
-## 📅 Submission Deadline
-**Date:** 31st May 2025
+
 
 ---
 
 ## 👨‍💻 Developed By
-Group of Engineering Students based on hands-on IoT + Web Development training.
+Bhim pd Rajbanshi Students based on hands-on IoT + Web Development training.
 
 If you have questions or want to contribute, open an issue or PR!
 
 ---
 
 ✔️ *Real-time water monitoring made simple and visual.*
+![Water Level Chart](https://github.com/bhimpdrajbanshi/SMART-WATER-TANK-MONITORING-SYSTEM-USING-ARDUINO-AND-DJANGO/blob/main/Screenshots/bh.jpg)
