@@ -1,0 +1,232 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% comment %} <meta http-equiv="refresh" content="5"> {% endcomment %}
+
+
+    <!-- Bootstrap CSS -->
+    {# Global stylesheets #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/docs.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/adminlte.min.css' %}">
+
+    <style>
+      .water-tank .liquid svg {
+        height:30em;
+        top: calc(97.5% - {{latest_level}}%);
+        position:absolute;
+        animation: waves 5s infinite linear;
+      }
+    </style>
+
+    <title>Estimation of Water Tank Level using Ultrasonic Sensor with Smart Alert System</title>
+  </head>
+  <body>
+
+    <div class="card">
+        <h4 class="bg-info p-2 text-center">Estimation of Water Tank Level using Ultrasonic Sensor with Smart Alert System</h4>
+      <div class="card-body">
+         <div class="container mt-3">
+
+          <div class="row">
+            <div class="col-6">
+               <div class="card" style="background:#605c5c0f;">
+                 <div class="card-body">
+                   <div class="row">
+                     <div class="col-5" style="padding-top: 3% !important;">
+                       <!-- Static Data Summary -->
+                       <div class="row">
+                         <div class="col-12 col-sm-6 col-md-12">
+                           <div class="info-box">
+                             <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-droplet"></i></span>
+           
+                             <div class="info-box-content">
+                               <span class="info-box-text">Water Level</span>
+                               <span class="info-box-number water-level">
+                               </span>
+                             </div>
+                             <!-- /.info-box-content -->
+                           </div>
+                           <!-- /.info-box -->
+                         </div>
+                          <div class="col-12 col-sm-6 col-md-12">
+                           <div class="info-box">
+                             <span class="info-box-icon bg-danger elevation-1"><i class="fa-solid fa-clock"></i></span>
+           
+                             <div class="info-box-content">
+                               <span class="info-box-text">Time</span>
+                               <span class="info-box-number">
+                                 {{ latest_time }}
+                                 <small>pm</small>
+                               </span>
+                             </div>
+                             <!-- /.info-box-content -->
+                           </div>
+                           <!-- /.info-box -->
+                          </div>
+                          <div class="col-12 col-sm-6 col-md-12">
+                           <div class="info-box">
+                             <span class="info-box-icon bg-success elevation-1"><i class="fa-solid fa-rectangle-list"></i></span>
+           
+                             <div class="info-box-content">
+                               <span class="info-box-text">Status</span>
+                               <span class="info-box-number status">
+                               </span>
+                             </div>
+                             <!-- /.info-box-content -->
+                           </div>
+                           <!-- /.info-box -->
+                         </div>
+                       </div>
+                     </div>
+                     <div class="col-7">
+                       <div class="water-tank">
+                       <div class="liquid">
+                         <svg class="water" viewBox="0 0 200 100">
+                           <defs>
+                             <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                             <stop offset="0" style="stop-color:#29ABE2"/>
+                             <stop offset="0.1643" style="stop-color:#28A6E3"/>
+                             <stop offset="0.3574" style="stop-color:#2496E6"/>
+                             <stop offset="0.5431" style="stop-color:#1E7DEA"/>
+                             <stop offset="0.7168" style="stop-color:#1559F0"/>
+                             <stop offset="0.874" style="stop-color:#0B2CF7"/>
+                             <stop offset="1" style="stop-color:#0000FF"/>
+                             </linearGradient>
+                           </defs>
+                           <path fill="url(#waterGradient)" d="
+                             M 0,0 v 100 h 200 v -100 
+                             c -10,0 -15,5 -25,5 c -10,0 -15,-5 -25,-5
+                             c -10,0 -15,5 -25,5 c -10,0 -15,-5 -25,-5
+                             c -10,0 -15,5 -25,5 c -10,0 -15,-5 -25,-5
+                             c -10,0 -15,5 -25,5 c -10,0 -15,-5 -25,-5
+                           "/>
+                         </svg>
+                       </div>
+                     
+                       <div class="indicator" data-value="75"></div> 
+                       <div class="indicator" data-value="50"></div> 
+                       <div class="indicator" data-value="25"></div> 
+                     
+                       <div class="label" style="bottom:{{latest_level}}%;">{{latest_level}}%</div> 
+                     </div> 
+           
+                     </div>
+                   </div>
+                 </div>
+                 <div class="card-footer bg-info text-center">
+                    Water Level Monitoring [ 100 Liter Tank Capacity ]
+                 </div>
+
+               </div>
+            </div>
+            <div class="col-6">
+              <div class="card" style="background:#605c5c0f;">
+                <div class="card-body">
+                  <canvas id="waterChart" width="100%" height="62%"></canvas>
+                </div>
+                <div class="card-footer bg-info text-center">
+                    Water Consumption Monitoring
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Global javascript #}
+    <script type="text/javascript" src="{% static 'js/docs.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/adminlte.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      const labels = {{ labels|safe }};
+      const values = {{ consumptions|safe }};
+
+      const ctx = document.getElementById('waterChart').getContext('2d');
+      const waterChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Water Level (Liter)',
+            data: values,
+            fill: true,
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0, 123, 255, 0.2)',
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              title: { display: true, text: 'Time' }
+            },
+            y: {
+              title: { display: true, text: 'Water Level (Liter)' },
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      // 🔁 Update chart with new data every 2 seconds
+      function fetchLatestChartPoint() {
+        fetch('/api/latest/')
+          .then(res => res.json())
+          .then(data => {
+            const newLabel = data.time;
+            const newValue = data.level;
+            const status = data.status
+
+            if ( status == 'Low' ||  status == 'High'){
+              $('.status').html(`<span class="badge badge-danger">${status}</span>`);
+            } else{
+              $('.status').html(`<span class="badge badge-success">${status}</span>`);
+            }
+
+
+            // Update label style and text
+            if ($('.label').length) {
+              const displayValue = Math.round(newValue) + 'liter';
+              $('.label').css('bottom', newValue + '%').text(displayValue);
+              $('.water-level').html(`${newValue}<small>liter</small>`);
+            }
+       
+            const lastLabel = waterChart.data.labels[waterChart.data.labels.length - 1];
+
+            // Only push new data if timestamp has changed
+            if (newLabel !== lastLabel) {
+              waterChart.data.labels.push(newLabel);
+              waterChart.data.datasets[0].data.push(newValue);
+
+              // Limit to last 20 entries
+              if (waterChart.data.labels.length > 20) {
+                waterChart.data.labels.shift();
+                waterChart.data.datasets[0].data.shift();
+              }
+
+              // Update SVG water wave position
+              const topValue = `calc(97.5% - ${newValue}%)`;
+              $('.water-tank .liquid svg').css('top', topValue);
+
+
+              waterChart.update();
+            }
+          })
+          .catch(err => console.error('Chart update error:', err));
+      }
+
+      setInterval(fetchLatestChartPoint, 2000); // Poll every 2 seconds
+    </script>
+
+  </body>
+</html>
