@@ -24,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&#bx*6g8u6*xlq)(8+%7zx^w3_c2biz+ekwrpevg!83$b=$8#b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+
 
 ALLOWED_HOSTS = ['smart-water-tank-monitoring-system-using.onrender.com']
 
