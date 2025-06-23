@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-&#bx*6g8u6*xlq)(8+%7zx^w3_c2biz+ekwrpevg!83$b=$8#b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['smart-water-tank-monitoring-system.onrender.com']
+ALLOWED_HOSTS = ['smart-water-tank-monitoring-system-using.onrender.com']
+
 
 
 # Application definition
