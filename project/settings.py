@@ -29,8 +29,8 @@ SECRET_KEY = 'django-insecure-&#bx*6g8u6*xlq)(8+%7zx^w3_c2biz+ekwrpevg!83$b=$8#b
 DEBUG = False
 
 
-# ALLOWED_HOSTS = ['smart-water-tank-monitoring-system-using.onrender.com']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['smart-water-tank-monitoring-system-using.onrender.com']
+# ALLOWED_HOSTS = ['*']
 
 
 # Application definition
